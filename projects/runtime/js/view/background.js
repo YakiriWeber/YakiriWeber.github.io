@@ -36,11 +36,21 @@ var background = function (window) {
             // TODO: 2 - Part 2
             // this fills the background with a obnoxious yellow
             // you should modify this to suit your game
-            var backgroundFill = draw.rect(canvasWidth, canvasHeight, 'orange');
-            background.addChild(backgroundFill);
 
             // TODO: 3 - Add a moon and starfield
+            var backgroundFill = draw.rect(canvasWidth, canvasHeight, 'orange');
+            background.addChild(backgroundFill);
+            var sun = draw.circle(200, "yellow", "red", 5);
+            background.addChild(sun);
+            sun.x = 1000;
+            sun.y = 200;
 
+            for (var i = 0; i < 100; i++) {
+                var distantStar = draw.circle(10, "red", "yellow", 2);
+                distantStar.x = canvasWidth * Math.random();
+                distantStar.y = groundY * Math.random();
+                background.addChild(distantStar);
+            }
 
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
 
