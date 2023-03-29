@@ -26,6 +26,8 @@ var background = function (window) {
         var background;
 
         // ANIMATION VARIABLES HERE:
+        var tree;
+        var buildings = [];
 
 
         // called at the start of game and whenever the page is resized
@@ -53,11 +55,19 @@ var background = function (window) {
             }
 
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-
-
+            for (var i = 0; i < 5; ++i) {
+                var buildingHeight = 300;
+                var building = draw.rect(75, buildingHeight, "LightGray", "Black", 1);
+                building.x = 200 * i;
+                building.y = groundY - buildingHeight;
+                background.addChild(building);
+                buildings.push(building);
+              }
             // TODO 4: Part 1 - Add a tree
-
-
+            tree = draw.bitmap("img/tree.png");
+            tree.x = 0;
+            tree.y = 0;
+            background.addChild(tree);
         } // end of render function - DO NOT DELETE
 
 
@@ -70,9 +80,16 @@ var background = function (window) {
             var groundY = ground.y;
 
             // TODO 4: Part 2 - Move the tree!
-
-
+            tree.x = tree.x + 1;
+            if (tree.x < -200) {
+                tree.x = canvasWidth;
+            }
             // TODO 5: Part 2 - Parallax
+            for (var i = 0; i < myArray.length; i++) {
+                var eachElement = myArray[i];
+              
+                // code to do something with each element
+              }
 
 
         } // end of update function - DO NOT DELETE
