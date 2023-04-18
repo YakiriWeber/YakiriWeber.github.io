@@ -55,6 +55,11 @@ var level01 = function (window) {
         game.addGameItem(enemy);
         }
         createSpirit(500, 200);
+        enemy.onPlayerCollision = function () {};
+        game.increaseScore(100);
+        enemy.fadeOut();
+
+
         // DO NOT EDIT CODE BELOW HERE
     }
 };
