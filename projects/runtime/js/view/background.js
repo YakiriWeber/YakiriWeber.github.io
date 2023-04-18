@@ -27,9 +27,8 @@ var background = function (window) {
 
         // ANIMATION VARIABLES HERE:
         var tree;
+        var trees = [];
         var buildings = [];
-
-
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
         function render() {
@@ -38,36 +37,45 @@ var background = function (window) {
             // TODO: 2 - Part 2
             // this fills the background with a obnoxious yellow
             // you should modify this to suit your game
+            var backgroundFill = draw.rect(canvasWidth, canvasHeight, 'lightyellow');
+            background.addChild(backgroundFill);
 
             // TODO: 3 - Add a moon and starfield
-            var backgroundFill = draw.rect(canvasWidth, canvasHeight, 'orange');
-            background.addChild(backgroundFill);
-            var sun = draw.circle(200, "yellow", "red", 5);
-            background.addChild(sun);
-            sun.x = 1000;
-            sun.y = 200;
 
-            for (var i = 0; i < 100; i++) {
-                var distantStar = draw.circle(10, "red", "yellow", 2);
-                distantStar.x = canvasWidth * Math.random();
-                distantStar.y = groundY * Math.random();
-                background.addChild(distantStar);
+            for (var i = 0; i <= 100; i++) {
+                var circle = draw.circle(10, "white", "LightGray", 2);
+                circle.x = canvasWidth * Math.random();
+                circle.y = groundY * Math.random();
+                background.addChild(circle);
             }
 
+            var moon = draw.circle(20, "white", "LightGray", 2);
+            moon.x = 1200;
+            moon.y = 200;
+            moon.scaleX = 10.0;
+            moon.scaleY = 10.0;
+            background.addChild(moon);
+
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            for (var i = 0; i < 5; ++i) {
-                var buildingHeight = 300;
+
+            for (var i = 0; i < 6; ++i) {
+                var buildingHeight = Math.random() * 400;
                 var building = draw.rect(75, buildingHeight, "LightGray", "Black", 1);
                 building.x = 200 * i;
                 building.y = groundY - buildingHeight;
                 background.addChild(building);
                 buildings.push(building);
-              }
+            }
+
             // TODO 4: Part 1 - Add a tree
-            tree = draw.bitmap("img/tree.png");
-            tree.x = 100;
-            tree.y = 100;
-            background.addChild(tree);
+            for (var i = 0; i < 3; ++i) {
+                tree = draw.bitmap("img/tree.png");
+                tree.x = 600 * i;
+                tree.y = groundY - 200;
+                background.addChild(tree);
+                trees.push(tree)
+            }
+
 
         } // end of render function - DO NOT DELETE
 
@@ -81,19 +89,26 @@ var background = function (window) {
             var groundY = ground.y;
 
             // TODO 4: Part 2 - Move the tree!
-            tree.x = tree.x + -1;
-            if (tree.x < 20) {
-                tree.x = canvasWidth;
+            for (var i = 0; i < trees.length; i++) {
+                var eachElement2 = trees[i];
+                eachElement2.x = eachElement2.x - 1;
+
+                if (eachElement2.x < -200) {
+                    eachElement2.x = canvasWidth;
+                }
+                // code to do something with each element
             }
+
             // TODO 5: Part 2 - Parallax
             for (var i = 0; i < buildings.length; i++) {
-                var building = buildings[i];
-                if (buildings <20)
-                building = canvasWidth;
-              
-                // code to do something with each element
-              }
+                var eachElement = buildings[i];
+                eachElement.x = eachElement.x - 1;
 
+                if (eachElement.x < -200) {
+                    eachElement.x = canvasWidth;
+                }
+                // code to do something with each element
+            }
 
         } // end of update function - DO NOT DELETE
 
